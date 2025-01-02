@@ -8,7 +8,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link me-2" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link me-2" href="{{url('/')}}">Home</a></li>
                     <li class="nav-item"><a class="nav-link me-2" href="{{route('room.index')}}">Rooms</a></li>
                     <li class="nav-item"><a class="nav-link me-2" href={{route('facilities.index')}}>Facilities</a></li>
                     <li class="nav-item"><a class="nav-link me-2" href="{{route('contact.index')}}">Contact Us</a></li>
@@ -26,26 +26,48 @@
     <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post">
+                <form method="POST" action="">
+                    @csrf
+
+                
+                    <!-- Modal Header -->
                     <div class="modal-header">
                         <h1 class="modal-title d-flex align-items-center"><i class="bi bi-person-circle fs-3 me-2"></i>User Login</h1>
                         <button type="reset" class="btn-close shadow-none" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                
+                    <!-- Modal Body -->
                     <div class="modal-body">
+                
+                        <!-- Error Message Alert -->
+                        @if ($errors->any())
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong>Error!</strong> Invalid credentials, please try again.
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                        <!-- Email Input -->
                         <div class="mb-3">
-                            <label class="form-label">Email Address</label>
-                            <input type="email" class="form-control shadow-none" required>
+                            <label for="email" class="form-label">{{ __('Email') }}</label>
+                            <input id="email" class="form-control shadow-none" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                         </div>
+                
+                        <!-- Password Input -->
                         <div class="mb-4">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control shadow-none" required>
+                            <label for="password" class="form-label">{{ __('Password') }}</label>
+                            <input id="password" class="form-control shadow-none" type="password" name="password" required autocomplete="current-password" />
                         </div>
+                
+                        <!-- Remember Me Checkbox -->
                         <div class="d-flex align-items-center justify-content-between mb-2">
-                            <button type="submit" class="btn btn-dark shadow-none">Login</button>
-                            <a href="#" class="text-secondary text-decoration-none">Forgot Password?</a>
+                            <button type="submit" class="btn btn-dark shadow-none">{{ __('Log in') }}</button>
+                                <a href="{{ route('password.request') }}" class="text-secondary text-decoration-none"> {{ __('Forgot your password?') }}</a>
                         </div>
                     </div>
                 </form>
+                
+                
+              
             </div>
         </div>
     </div>
