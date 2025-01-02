@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\facilitiesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -20,3 +24,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('/rooms',[RoomController::class,'index'])->name('room.index');
+Route::get('/facilities',[facilitiesController::class,'index'])->name('facilities.index');
+Route::get('/contact',[ContactUsController::class,'index'])->name('contact.index');
+Route::get('/about',[AboutController::class,'index'])->name('about.index');

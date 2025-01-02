@@ -215,19 +215,19 @@
             <h5 class="mt-3">Heater</h5>
         </div>
         <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-4">
-            <img src="{{asset('images/facilities/1.svg')}}" width="80px">
+            <img src="{{asset('images/facilities/2.svg')}}" width="80px">
             <h5 class="mt-3">Heater</h5>
         </div>
         <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-4">
-            <img src="{{asset('images/facilities/1.svg')}}" width="80px">
+            <img src="{{asset('images/facilities/3.svg')}}" width="80px">
             <h5 class="mt-3">Heater</h5>
         </div>
         <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-4">
-            <img src="{{asset('images/facilities/1.svg')}}" width="80px">
+            <img src="{{asset('images/facilities/4.svg')}}" width="80px">
             <h5 class="mt-3">Heater</h5>
         </div>
         <div class="col-lg-2 col-md-2 text-center bg-white rounded shadow py-4 my-4">
-            <img src="{{asset('images/facilities/1.svg')}}" width="80px">
+            <img src="{{asset('images/facilities/5.svg')}}" width="80px">
             <h5 class="mt-3">Heater</h5>
         </div>
 

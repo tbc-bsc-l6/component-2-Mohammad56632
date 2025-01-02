@@ -7,10 +7,10 @@
                 <div class="col-lg-4 p-4">
                     <h5 class="mb-3">Links</h5>
                     <a href="index.php" class="d-inline-block mb-2 text-dark text-decoration-none">Home</a><br>
-                    <a href="room.php" class="d-inline-block mb-2 text-dark text-decoration-none">Rooms</a><br>
-                    <a href="facilities.php" class="d-inline-block mb-2 text-dark text-decoration-none">Facilities</a><br>
-                    <a href="contact.php" class="d-inline-block mb-2 text-dark text-decoration-none">Contact us</a><br>
-                    <a href="about.php" class="d-inline-block mb-2 text-dark text-decoration-none">About us</a><br>
+                    <a href="{{route('room.index')}}" class="d-inline-block mb-2 text-dark text-decoration-none">Rooms</a><br>
+                    <a href="{{route('facilities.index')}}" class="d-inline-block mb-2 text-dark text-decoration-none">Facilities</a><br>
+                    <a href="{{route('contact.index')}}" class="d-inline-block mb-2 text-dark text-decoration-none">Contact us</a><br>
+                    <a href="{{route('about.index')}}" class="d-inline-block mb-2 text-dark text-decoration-none">About us</a><br>
         
                 </div>
         

@@ -9,10 +9,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link me-2" href="index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link me-2" href="rooms.php">Rooms</a></li>
-                    <li class="nav-item"><a class="nav-link me-2" href="facilities.php">Facilities</a></li>
-                    <li class="nav-item"><a class="nav-link me-2" href="contact.php">Contact Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link me-2" href="{{route('room.index')}}">Rooms</a></li>
+                    <li class="nav-item"><a class="nav-link me-2" href={{route('facilities.index')}}>Facilities</a></li>
+                    <li class="nav-item"><a class="nav-link me-2" href="{{route('contact.index')}}">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('about.index')}}">About</a></li>
                 </ul>
                 <div class="d-flex">
                     <button type="button" class="btn btn-outline-dark shadow-none me-lg-3 me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
