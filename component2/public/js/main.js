@@ -1,5 +1,5 @@
 // <!-- Initialize Swiper -->
-  var swiper = new Swiper(".swiper-container", {
+var swiper = new Swiper(".swiper-container", {
     spaceBetween: 30,
     effect: "fade",
       loop:true,
