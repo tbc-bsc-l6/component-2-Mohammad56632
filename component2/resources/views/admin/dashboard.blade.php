@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Panel</title>
+    <title>Dashboard -> @yield('title')</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -118,17 +118,17 @@ border-color: #2ec1ad;
                             <a class="nav-link text-white" href="{{url('/dashboard')}}">Dashboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="rooms.php">Rooms</a>
+                            <a class="nav-link text-white" href="{{route('rooms.index')}}">Rooms</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="features_facilities.php">Features & Facilities</a>
+                            <a class="nav-link text-white" href="{{route('features.index')}}">Features & Facilities</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="user_queries.php">User Queries</a>
                         </li>
                        
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="carousel.php">Carousel</a>
+                            <a class="nav-link text-white" href="{{route('carousel.index')}}">Carousel</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{route('admin.setting')}}">Settings</a>

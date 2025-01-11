@@ -309,6 +309,7 @@
                                 </button>
                             </form>
                         </div>
+                        <h3 class="text-center">{{$teams->name}}</h3>
                     </div>
                 </div>
 

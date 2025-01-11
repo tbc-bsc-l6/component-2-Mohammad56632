@@ -1,11 +1,15 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\CarouseController;
 use App\Http\Controllers\ContactDetailsController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\FacilitieController;
 use App\Http\Controllers\facilitiesController;
+use App\Http\Controllers\FeaturesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TeamDetailsController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +38,34 @@ Route::middleware('auth')->group(function () {
 
     // Route to toggle active/inactive status
     Route::patch('/team/management/{team}/toggle-status', [TeamDetailsController::class, 'toggleStatus'])->name('team.management.toggleStatus');
+
+    Route::get('/carousel', [CarouseController::class, 'index'])->name('carousel.index');
+    Route::post('/carousel/upload', [CarouseController::class, 'store'])->name('carousel.store');
+    // Delete route for the team member
+    Route::delete('/carousel/{id}', [CarouseController::class, 'destroy'])->name('carousel.destroy');
+
+    // Route to toggle active/inactive status
+    Route::patch('/carousel/{id}/toggle-status', [CarouseController::class, 'toggleStatus'])->name('carousel.toggleStatus');
+
+    // feature and facility
+    Route::get('/features', [FeaturesController::class, 'index'])->name('features.index');
+    Route::post('/features/store', [FeaturesController::class, 'store'])->name('features.store');
+    Route::delete('/features/store/{id}', [FeaturesController::class, 'destory'])->name('feature.destory');
+
+    Route::post('/facilities/store', [FacilitieController::class, 'store'])->name('facilities.store');
+
+    Route::delete('/facilities/delete/{id}',[FacilitieController::class,'destory'])->name('facilities.destory');
+    Route::put('/facilities/update/{id}',[FacilitieController::class,'update'])->name('facilities.update');
+
+    //rooms 
+    Route::get('/rooms/management',[RoomsController::class,'index'])->name('rooms.index');
+    Route::post('/rooms/add',[RoomsController::class,'store'])->name('rooms.store');
+    Route::post('/rooms/edit/{id}',[RoomsController::class,'update'])->name('rooms.update');
+
+    Route::delete('/rooms/{room}', [RoomsController::class, 'destroy'])->name('rooms.destroy');
+
+
+
 });
 
 require __DIR__ . '/auth.php';
