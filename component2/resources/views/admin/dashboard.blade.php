@@ -124,7 +124,7 @@ border-color: #2ec1ad;
                             <a class="nav-link text-white" href="{{route('features.index')}}">Features & Facilities</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" href="user_queries.php">User Queries</a>
+                            <a class="nav-link text-white" href="{{route('user.query.index')}}">User Queries</a>
                         </li>
                        
                         <li class="nav-item">

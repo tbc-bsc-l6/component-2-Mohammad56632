@@ -74,6 +74,6 @@ class RegisteredUserController extends Controller
         // Automatically login the user
         Auth::login($user);
 
-        return redirect()->route('dashboard')->with('success', 'User registered successfully.');
+        return redirect()->route('welcome')->with('success', 'User registered successfully.');
     }
 }

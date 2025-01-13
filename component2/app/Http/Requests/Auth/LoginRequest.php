@@ -52,14 +52,18 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        // Check user's role and redirect based on the role
+        // Check the authenticated user's role and handle redirection
         $user = Auth::user();
 
         if ($user->role == 2) {
+            // Role 2: Redirect to dashboard
             session()->put('dashboard_redirect', route('dashboard'));
         } elseif ($user->role == 1) {
-            session()->put('dashboard_redirect', route('user.dashboard'));
+            // Role 1: Redirect to welcome page
+            session()->put('dashboard_redirect', route('welcome')); // Set redirection to 'welcome' page
+            session()->flash('success', 'Login success !!!'); // Add a success message to the session
         } else {
+            // Invalid role: Logout the user and throw an error
             Auth::logout();
             throw ValidationException::withMessages([
                 'email_or_phone' => 'Unauthorized access.',
@@ -68,6 +72,7 @@ class LoginRequest extends FormRequest
 
         RateLimiter::clear($this->throttleKey());
     }
+
 
     /**
      * Get the credentials for authentication.
@@ -112,6 +117,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email_or_phone')).'|'.$this->ip());
+        return Str::transliterate(Str::lower($this->string('email_or_phone')) . '|' . $this->ip());
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carouse;
+use App\Models\ContactDetail;
+use App\Models\Facilities;
 use App\Models\GeneralSetting;
 use App\Models\RoomImage;
 use App\Models\Rooms;
@@ -16,6 +18,8 @@ class WelcomeController extends Controller
         $slider = Carouse::all();
         $rooms = Rooms::with('features.feature', 'facilities.facility')->orderby('created_at', 'desc')->take(3)->get();
         $roomImage = RoomImage::all();
-        return view('welcome',compact('logo','slider','rooms','roomImage'));
+        $facilities = Facilities::all();
+        $contacts = ContactDetail::first();
+        return view('welcome',compact('logo','slider','rooms','roomImage','facilities','contacts'));
     }
 }
