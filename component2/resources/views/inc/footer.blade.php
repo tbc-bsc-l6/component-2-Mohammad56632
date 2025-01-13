@@ -2,7 +2,9 @@
             <div class="row">
                 <div class="col-lg-4 p-4">
                     <h3 class="h-font fw-bold fs-3 mb-2">rain hotel</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, ad quos voluptate unde veniam, eaque officiis laborum nostrum, qui dolorem sapiente placeat cumque quis numquam rerum iste! Quam, nesciunt mollitia?</p>
+                    <p>
+                        {{$logo->aboutus}}
+                    </p>
                 </div>
                 <div class="col-lg-4 p-4">
                     <h5 class="mb-3">Links</h5>

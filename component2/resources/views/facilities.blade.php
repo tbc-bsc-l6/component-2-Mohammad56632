@@ -16,15 +16,18 @@
     <div class="row">
   
       <!-- Facility Data Loop Start -->
+      @foreach ($facilities as $f)
       <div class="col-lg-4 col-md-6 mb-5 px-4">
         <div class="bg-white rounded shadow p-4 border-top border-dark pop">
           <div class="d-flex align-items-center mb-2">
-            <img src="{{asset('images/facilities/1.svg')}}" width="40px">
-            <h5 class="m-0 ms-3">Facility Name</h5>
+            <img src="{{asset($f->icon_path)}}" width="40px">
+            <h5 class="m-0 ms-3">{{$f->name}}</h5>
           </div>
-          <p>Facility description goes here.</p>
+          <p>{{$f->description}}</p>
         </div>
       </div>
+      @endforeach
+
       <!-- Facility Data Loop End -->
   
     </div>

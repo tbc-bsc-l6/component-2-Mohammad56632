@@ -12,11 +12,9 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\TeamDetailsController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -60,7 +58,12 @@ Route::middleware('auth')->group(function () {
     //rooms 
     Route::get('/rooms/management',[RoomsController::class,'index'])->name('rooms.index');
     Route::post('/rooms/add',[RoomsController::class,'store'])->name('rooms.store');
-    Route::post('/rooms/edit/{id}',[RoomsController::class,'update'])->name('rooms.update');
+    Route::put('/rooms/edit/{id}',[RoomsController::class,'update'])->name('rooms.update');
+    Route::put('/room/room/toggle/{id}', [RoomsController::class, 'roomtoggleStatus'])->name('rooms.toggale');
+
+    Route::post('/room/image/uploade/{id}',[RoomsController::class,'imgStore'])->name('room.image.store');
+    Route::delete('/room/image/{id}', [RoomsController::class, 'imgDelete'])->name('room.image.delete');
+    Route::put('/room/image/toggle-status/{id}', [RoomsController::class, 'toggleStatus'])->name('room.image.toggleStatus');
 
     Route::delete('/rooms/{room}', [RoomsController::class, 'destroy'])->name('rooms.destroy');
 
@@ -71,8 +74,9 @@ Route::middleware('auth')->group(function () {
 require __DIR__ . '/auth.php';
 
 
-
+Route::get('/',[WelcomeController::class,'index']);
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
+Route::get('rooms/details/{id}',[RoomController::class,'showroom'])->name('rooms.details');
 Route::get('/facilities', [facilitiesController::class, 'index'])->name('facilities.index');
 Route::get('/contact', [ContactUsController::class, 'index'])->name('contact.index');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
