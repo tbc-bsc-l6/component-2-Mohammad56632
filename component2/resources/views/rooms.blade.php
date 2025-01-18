@@ -115,7 +115,7 @@
             </div>
             <div class="col-md-2 text-center">
               <h6 class="mb-4">${{$room->price}} per night</h6>
-              <a href="#" class="btn btn-sm text-white custom-bg shadow-none mb-2">Book Now</a>
+              <a href="{{route('rooms.book',$room->id)}}" class="btn btn-sm text-white custom-bg shadow-none mb-2">Book Now</a>
               <a href="{{route('rooms.details',$room->id)}}" class="btn btn-sm btn-outline-dark shadow-none bg-dark text-white">More details</a>
             </div>
           </div>

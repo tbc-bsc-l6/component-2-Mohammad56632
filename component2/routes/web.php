@@ -8,6 +8,7 @@ use App\Http\Controllers\FacilitieController;
 use App\Http\Controllers\facilitiesController;
 use App\Http\Controllers\FeaturesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoomBookController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomsController;
 use App\Http\Controllers\SettingController;
@@ -54,16 +55,16 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/facilities/store', [FacilitieController::class, 'store'])->name('facilities.store');
 
-    Route::delete('/facilities/delete/{id}',[FacilitieController::class,'destory'])->name('facilities.destory');
-    Route::put('/facilities/update/{id}',[FacilitieController::class,'update'])->name('facilities.update');
+    Route::delete('/facilities/delete/{id}', [FacilitieController::class, 'destory'])->name('facilities.destory');
+    Route::put('/facilities/update/{id}', [FacilitieController::class, 'update'])->name('facilities.update');
 
     //rooms 
-    Route::get('/rooms/management',[RoomsController::class,'index'])->name('rooms.index');
-    Route::post('/rooms/add',[RoomsController::class,'store'])->name('rooms.store');
-    Route::put('/rooms/edit/{id}',[RoomsController::class,'update'])->name('rooms.update');
+    Route::get('/rooms/management', [RoomsController::class, 'index'])->name('rooms.index');
+    Route::post('/rooms/add', [RoomsController::class, 'store'])->name('rooms.store');
+    Route::put('/rooms/edit/{id}', [RoomsController::class, 'update'])->name('rooms.update');
     Route::put('/room/room/toggle/{id}', [RoomsController::class, 'roomtoggleStatus'])->name('rooms.toggale');
 
-    Route::post('/room/image/uploade/{id}',[RoomsController::class,'imgStore'])->name('room.image.store');
+    Route::post('/room/image/uploade/{id}', [RoomsController::class, 'imgStore'])->name('room.image.store');
     Route::delete('/room/image/{id}', [RoomsController::class, 'imgDelete'])->name('room.image.delete');
     Route::put('/room/image/toggle-status/{id}', [RoomsController::class, 'toggleStatus'])->name('room.image.toggleStatus');
 
@@ -71,23 +72,23 @@ Route::middleware('auth')->group(function () {
 
 
     //user query
-    Route::get('user/query',[UserQueryController::class,'index'])->name('user.query.index');
-    Route::delete('/user/query/delete/{id}',[UserQueryController::class,'destory'])->name('user.query.delete');
-
+    Route::get('user/query', [UserQueryController::class, 'index'])->name('user.query.index');
+    Route::delete('/user/query/delete/{id}', [UserQueryController::class, 'destory'])->name('user.query.delete');
 });
 
 require __DIR__ . '/auth.php';
 
 
-Route::get('/',[WelcomeController::class,'index'])->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
-Route::get('rooms/details/{id}',[RoomController::class,'showroom'])->name('rooms.details');
+Route::get('rooms/details/{id}', [RoomController::class, 'showroom'])->name('rooms.details');
 Route::get('/facilities', [facilitiesController::class, 'index'])->name('facilities.index');
 Route::get('/contact', [ContactUsController::class, 'index'])->name('contact.index');
-Route::post('/user/query/store',[UserQueryController::class,'store'])->name('user.query.store');
+Route::post('/user/query/store', [UserQueryController::class, 'store'])->name('user.query.store');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::get('/room/book/{id}', [RoomBookController::class, 'index'])->name('rooms.book');
+Route::post('/room/book/{room_id}',[RoomBookController::class,'store'])->name('room.book.store');
 
-
-Route::middleware('auth')->group(function (){
-    Route::get('user/profile',[UserProfileController::class,'index'])->name('user.profile');
+Route::middleware('auth')->group(function () {
+    Route::get('user/profile', [UserProfileController::class, 'index'])->name('user.profile');
 });
