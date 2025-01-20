@@ -8,13 +8,17 @@ use App\Http\Controllers\FacilitieController;
 use App\Http\Controllers\facilitiesController;
 use App\Http\Controllers\FeaturesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\RoomBookController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\RoomsController;
+use App\Http\Controllers\SerachRoomController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\ShowBookingListController;
 use App\Http\Controllers\TeamDetailsController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserQueryController;
+use App\Http\Controllers\UserRegisterController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -72,8 +76,16 @@ Route::middleware('auth')->group(function () {
 
 
     //user query
-    Route::get('user/query', [UserQueryController::class, 'index'])->name('user.query.index');
+    Route::get('query', [UserQueryController::class, 'index'])->name('user.query.index');
     Route::delete('/user/query/delete/{id}', [UserQueryController::class, 'destory'])->name('user.query.delete');
+    //register users
+    Route::get('register/user', [UserRegisterController::class, 'index'])->name('register.index');
+    Route::post('/user/{id}/update-status', [UserRegisterController::class, 'updateStatus'])->name('user.updateStatus');
+
+    // user review
+    Route::get('review', [ReviewController::class, 'index'])->name('users.review.index');
+    Route::patch('/reviews/{id}/toggle-status', [ReviewController::class, 'toggleStatus'])->name('review.toggleStatus');
+
 });
 
 require __DIR__ . '/auth.php';
@@ -81,14 +93,24 @@ require __DIR__ . '/auth.php';
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/rooms', [RoomController::class, 'index'])->name('room.index');
+Route::post('/rooms/filter', [RoomController::class, 'filterRooms'])->name('rooms.filter');
+
 Route::get('rooms/details/{id}', [RoomController::class, 'showroom'])->name('rooms.details');
+Route::get('/rooms/search', [SerachRoomController::class, 'search'])->name('rooms.search');
+
 Route::get('/facilities', [facilitiesController::class, 'index'])->name('facilities.index');
 Route::get('/contact', [ContactUsController::class, 'index'])->name('contact.index');
 Route::post('/user/query/store', [UserQueryController::class, 'store'])->name('user.query.store');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/room/book/{id}', [RoomBookController::class, 'index'])->name('rooms.book');
-Route::post('/room/book/{room_id}',[RoomBookController::class,'store'])->name('room.book.store');
+Route::post('/room/book/{room_id}', [RoomBookController::class, 'store'])->name('room.book.store');
 
+//rejester users special data only show after login
 Route::middleware('auth')->group(function () {
     Route::get('user/profile', [UserProfileController::class, 'index'])->name('user.profile');
+    Route::get('/user/room/book', [ShowBookingListController::class, 'index'])->name('room.booking');
+    Route::post('/room/download-pdf/{id}', [ShowBookingListController::class, 'downloadPdf'])->name('room.download.pdf');
+
+    Route::delete('/user/room/book/delete/{id}', [ShowBookingListController::class, 'destroy'])->name('booking.destroy');
+    Route::post('/reviews/{roomId}', [ReviewController::class, 'store'])->name('review.store');
 });

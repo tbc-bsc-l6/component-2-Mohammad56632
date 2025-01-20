@@ -126,14 +126,18 @@ border-color: #2ec1ad;
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{route('user.query.index')}}">User Queries</a>
                         </li>
-                       
                         <li class="nav-item">
                             <a class="nav-link text-white" href="{{route('carousel.index')}}">Carousel</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link text-white" href="{{route('register.index')}}">User Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{{route('users.review.index')}}">Review</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link text-white" href="{{route('admin.setting')}}">Settings</a>
                         </li>
-    
                     </ul>
                 </div>
             </div>

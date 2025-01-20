@@ -70,22 +70,13 @@
     <div class="swiper mySwiper">
       <div class="swiper-wrapper mb-5">
         <!-- Loop through team members -->
+        @foreach ($team as $t)
         <div class="swiper-slide bg-white text-center overflow-hidden rounded">
-          <img src="{{asset('images/rooms/1.jpg')}}" class="w-100">
-          <h5 class="mt-2">Your Name Here</h5>
-        </div>
-        <div class="swiper-slide bg-white text-center overflow-hidden rounded">
-            <img src="{{asset('images/rooms/2.jpg')}}" class="w-100">
-            <h5 class="mt-2">Your Name Here</h5>
-        </div>
-        <div class="swiper-slide bg-white text-center overflow-hidden rounded">
-            <img src="{{asset('images/rooms/1.jpg')}}" class="w-100">
-            <h5 class="mt-2">Your Name Here</h5>
-          </div>
-          <div class="swiper-slide bg-white text-center overflow-hidden rounded">
-              <img src="{{asset('images/rooms/2.jpg')}}" class="w-100">
-              <h5 class="mt-2">Your Name Here</h5>
-          </div>
+          <img src="{{asset($t->image)}}" class="w-100">
+          <h5 class="mt-2">{{$t->name}}</h5>
+      </div>
+        @endforeach
+
         <!-- Repeat for each team member -->
       </div>
       <div class="swiper-pagination"></div>

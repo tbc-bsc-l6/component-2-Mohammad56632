@@ -23,7 +23,6 @@ class RoomBookController extends Controller
             ->findOrFail($id);
         return view('roomsBook', compact('logo', 'roomImages', 'roomdetails'));
     }
-
     public function store(Request $request, $room_id)
     {
         if (!Auth::check()) {

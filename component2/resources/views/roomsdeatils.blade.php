@@ -89,7 +89,8 @@
                     </div>
 
                     <!-- Booking Button -->
-                    <a href="#" class="btn w-100 text-white custom-bg shadow-none mb-3">Book Now</a>
+                    <a href="{{ route('rooms.book', $roomdetails->id) }}" class="btn btn-sm text-dark btn-success shadow-none mb-2">Book Now</a>
+
                 </div>
             </div>
         </div>
@@ -103,20 +104,31 @@
         </div>
 
         <!-- Reviews Section -->
+        <h5 class="mb-3">Reviews & Ratings</h5>
+
         <div>
-            <h5 class="mb-3">Reviews & Ratings</h5>
-            <div class="profile d-flex align-items-center mb-3">
-                <img src="images/facilities/star.svg" width="30px">
-                <h6 class="m-0 ms-2">Random user1</h6>
-              </div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cupiditate voluptatum omnis dolores? Voluptates, voluptatem?</p>
-              <div class="rating">
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
-                <i class="bi bi-star-fill text-warning"></i>
+            @foreach ($review as $r)
+            @if ($r->status == 1)
+            <div class="card mb-4 border-0 shadow">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="{{ asset($r->user->profile) }}" class="rounded-circle" width="40" height="40">
+                        <h6 class="m-0 ms-3">{{ $r->user->name }}</h6>
+                    </div>
+                    <p class="mb-3">{{ $r->description }}</p>
+                    <div class="rating">
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= $r->review)
+                                <span class="text-warning">&#9733;</span>
+                            @else
+                                <span class="text-muted">&#9733;</span>
+                            @endif
+                        @endfor
+                    </div>
+                </div>
             </div>
+            @endif
+        @endforeach
         </div>
     </div>
 </div>

@@ -23,37 +23,49 @@
         <div class="row">
             <div class="col-lg-12 bg-white shadow p-4 rounded">
                 <h5 class="mb-4">Check Booking Availability</h5>
-                <form action="" method="post">
+                <form action="{{ route('rooms.search') }}" method="GET">
                     <div class="row align-items-end">
                         <div class="col-lg-3 mb-3">
                             <label class="form-label" style="font-weight: 500;">Check-in</label>
-                            <input type="date" class="form-control shadow-none">
+                            <input type="date" name="check_in" class="form-control shadow-none" min="{{ date('Y-m-d') }}" value="{{ old('check_in', request()->get('check_in')) }}">
+                            @error('check_in')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-lg-3 mb-3">
                             <label class="form-label" style="font-weight: 500;">Check-out</label>
-                            <input type="date" class="form-control shadow-none">
+                            <input type="date" name="check_out" class="form-control shadow-none" min="{{ date('Y-m-d') }}" value="{{ old('check_out', request()->get('check_out')) }}">
+                            @error('check_out')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="col-lg-3 mb-3">
-                            <label class="form-label" style="font-weight: 500;">Adult</label>
-                            <select class="form-select shadow-none">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <label class="form-label" style="font-weight: 500;">Adults</label>
+                            <select name="adults" class="form-select shadow-none">
+                                <option value="1" {{ request()->get('adults') == 1 ? 'selected' : '' }}>One</option>
+                                <option value="2" {{ request()->get('adults') == 2 ? 'selected' : '' }}>Two</option>
+                                <option value="3" {{ request()->get('adults') == 3 ? 'selected' : '' }}>Three</option>
+                                <option value="4" {{ request()->get('adults') == 4 ? 'selected' : '' }}>Foure</option>
+                                <option value="5" {{ request()->get('adults') == 5 ? 'selected' : '' }}>Five</option>
                             </select>
                         </div>
-                        <div class="col-lg-2 mb-3">
+                        <div class="col-lg-3 mb-3">
                             <label class="form-label" style="font-weight: 500;">Children</label>
-                            <select class="form-select shadow-none">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                            <select name="children" class="form-select shadow-none">
+                                <option value="1" {{ request()->get('children') == 1 ? 'selected' : '' }}>One</option>
+                                <option value="2" {{ request()->get('children') == 2 ? 'selected' : '' }}>Two</option>
+                                <option value="3" {{ request()->get('children') == 3 ? 'selected' : '' }}>Three</option>
+                                <option value="4" {{ request()->get('children') == 4 ? 'selected' : '' }}>Foure</option>
+                                <option value="5" {{ request()->get('children') == 5 ? 'selected' : '' }}>Five</option>
+                                <option value="6" {{ request()->get('children') == 6 ? 'selected' : '' }}>Six</option>
                             </select>
                         </div>
-                        <div class="col-lg-1 mt-2">
-                            <button class="btn text-white shadow-none custom-bg mb-3">Submit</button>
+                        <div class="col-lg-12 mt-2">
+                            <button class="btn btn-success text-white shadow-none">Search</button>
                         </div>
                     </div>
                 </form>
+                
             </div>
         </div>
     </div>
@@ -112,7 +124,7 @@
                             </span>
                         </div>
                         <div class="d-flex justify-content-evenly mb-2">
-                            <a href="#" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
+                            <a href="{{route('rooms.book',$room->id)}}" class="btn btn-sm text-white custom-bg shadow-none">Book Now</a>
                             <a href="{{route('rooms.details',$room->id)}}" class="btn btn-sm btn-outline-dark shadow-none">More details</a>
                         </div>
                     </div>
@@ -162,84 +174,27 @@
         <div class="swiper-wrapper mb-5">
 
             <!-- Testimonial Slide 1 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/facilities/star.svg" width="30px">
-                    <h6 class="m-0 ms-2">Random User 1</h6>
+            @foreach ($review as $r)
+                @if ($r->status == 1)
+                <div class="swiper-slide bg-white p-4">
+                    <div class="profile d-flex align-items-center mb-3">
+                        <img src="{{asset($r->user->profile)}}" width="30px">
+                        <h6 class="m-0 ms-2">{{$r->user->name}}</h6>
+                    </div>
+                    <p>{{$r->description}}</p>
+                    <div class="rating">
+                        @for ($i = 1; $i <= 5; $i++)
+                        @if ($i <= $r->review)
+                            <span class="text-warning">&#9733;</span>
+                        @else
+                            <span class="text-muted">&#9733;</span>
+                        @endif
+                    @endfor
+                        
+                    </div>
                 </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cupiditate voluptatum omnis dolores? Voluptates, voluptatem?</p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
-
-            <!-- Testimonial Slide 2 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/facilities/star.svg" width="30px">
-                    <h6 class="m-0 ms-2">Random User 2</h6>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cupiditate voluptatum omnis dolores? Voluptates, voluptatem?</p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
-
-            <!-- Testimonial Slide 3 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/facilities/star.svg" width="30px">
-                    <h6 class="m-0 ms-2">Random User 3</h6>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cupiditate voluptatum omnis dolores? Voluptates, voluptatem?</p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
-
-            <!-- Testimonial Slide 4 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/facilities/star.svg" width="30px">
-                    <h6 class="m-0 ms-2">Random User 4</h6>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cupiditate voluptatum omnis dolores? Voluptates, voluptatem?</p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
-
-            <!-- Testimonial Slide 5 -->
-            <div class="swiper-slide bg-white p-4">
-                <div class="profile d-flex align-items-center mb-3">
-                    <img src="images/facilities/star.svg" width="30px">
-                    <h6 class="m-0 ms-2">Random User 5</h6>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit cupiditate voluptatum omnis dolores? Voluptates, voluptatem?</p>
-                <div class="rating">
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                    <i class="bi bi-star-fill text-warning"></i>
-                </div>
-            </div>
+                @endif
+            @endforeach
 
         </div>
         <!-- Swiper Pagination -->

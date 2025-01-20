@@ -6,6 +6,7 @@ use App\Models\Carouse;
 use App\Models\ContactDetail;
 use App\Models\Facilities;
 use App\Models\GeneralSetting;
+use App\Models\Review;
 use App\Models\RoomImage;
 use App\Models\Rooms;
 use Illuminate\Http\Request;
@@ -20,6 +21,8 @@ class WelcomeController extends Controller
         $roomImage = RoomImage::all();
         $facilities = Facilities::all();
         $contacts = ContactDetail::first();
-        return view('welcome',compact('logo','slider','rooms','roomImage','facilities','contacts'));
+        $review = Review::with(['room', 'user'])->orderby('created_at', 'desc')->paginate(8);
+
+        return view('welcome',compact('logo','slider','rooms','roomImage','facilities','contacts','review'));
     }
 }

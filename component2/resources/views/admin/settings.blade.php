@@ -1,5 +1,5 @@
 @extends('admin.dashboard')
-
+@section('title','Settings')
 @section('content')
     <h3 class="mb-4">SETTINGS</h3>
 
@@ -271,6 +271,32 @@
                 <i class="bi bi-plus-square"></i> Add
             </button>
         </div>
+                        <div class="modal fade" id="team-s" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <form method="POST" action="{{ route('team.management.store')}}" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Edit Team Member</h5>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="mb-3">
+                                                <label class="form-label fw-bold">Name</label>
+                                                <input type="text" name="name" class="form-control" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label fw-bold">Image</label>
+                                                <input type="file" name="image" class="form-control" accept="image/*">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn text-secondary shadow-none" data-bs-dismiss="modal">CANCEL</button>
+                                            <button type="submit" class="btn custom-bg text-white shadow-none">submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
         <div class="row" id="team-data">
             @foreach ($team as $teams)
                 <div class="col-md-3 mb-3">

@@ -56,9 +56,9 @@
 
                             </table>
                             <!-- Pagination Links -->
-<div class="mt-3">
-    {{ $userQuery->links() }}
-</div>
+                            <div class="mt-3">
+                                {{ $userQuery->links() }}
+                            </div>
                         </div>
 
                     </div>

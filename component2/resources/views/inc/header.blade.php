@@ -24,9 +24,7 @@
             </a>
           
             <ul class="dropdown-menu me-4">
-                <li><img src="{{ asset(Auth::user()->profile) }}" alt="Profile" class="rounded-circle" width="30" height="30">
-                </li>
-              <li><a class="dropdown-item" href="#">Your Booking</a></li>
+              <li><a class="dropdown-item" href="{{route('room.booking')}}">Booking</a></li>
               <li><a class="dropdown-item" href="{{route('user.profile')}}">Profile</a></li>
               <li>
                 <form method="POST" action="{{ route('logout') }}" class="inline">
